@@ -13,8 +13,8 @@ const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 const initialTasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-function App(props) {
-  const [tasks, setTasks] = useState(props.tasks);
+function App() {
+  const [tasks, setTasks] = useState(initialTasks);
   const [filter, setFilter] = useState("All");
 
   function addTask(name) {
