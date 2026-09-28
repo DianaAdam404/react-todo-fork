@@ -11,6 +11,7 @@ const FILTER_MAP = {
 };
 const FILTER_NAMES = Object.keys(FILTER_MAP);
 
+const initialTasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
 function App(props) {
   const [tasks, setTasks] = useState(props.tasks);
@@ -51,7 +52,7 @@ function App(props) {
       return task;
     });
     setTasks(editedTaskList);
-  }  
+  }
   const filterList = FILTER_NAMES.map((name) => (
     <FilterButton
       key={name}
@@ -81,17 +82,16 @@ function App(props) {
   return (
     <div className="todoapp stack-large">
       <h1>TodoMatic</h1>
-      <Form addTask={addTask}/>
+      <Form addTask={addTask} />
       <div className="filters btn-group stack-exception">
-        <div className="filters btn-group stack-exception">
-          {filterList}
-        </div>
+        <div className="filters btn-group stack-exception">{filterList}</div>
       </div>
       <h2 id="list-heading">{headingText}</h2>
       <ul
         role="list"
         className="todo-list stack-large stack-exception"
-        aria-labelledby="list-heading">
+        aria-labelledby="list-heading"
+      >
         {taskList}
       </ul>
     </div>
