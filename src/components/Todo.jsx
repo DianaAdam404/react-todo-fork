@@ -29,7 +29,7 @@ function Todo(props) {
     <form className="stack-small" onSubmit={handleSubmit}>
       {" "}
       <div className="form-group">
-        <label className="todo-label" htmlFor={props.id}>
+        <label className="todo-label" class="todo-label" htmlFor={props.id}>
           New name for {props.name}
         </label>
         <input
@@ -69,6 +69,19 @@ function Todo(props) {
         <label className="todo-label" htmlFor={props.id}>
           {props.name}
         </label>
+      </div>
+      <div className="todo-priority">
+        <label htmlFor={`${props.id}-priority`}>Priority</label>
+        <input
+          id={`${props.id}-priority`}
+          type="number"
+          min="0"
+          step="1"
+          value={props.priority}
+          onChange={(event) =>
+            props.updateTaskPriority(props.id, Number(event.target.value))
+          }
+        />
       </div>
       <div className="btn-group">
         <button

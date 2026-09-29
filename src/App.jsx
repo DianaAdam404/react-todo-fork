@@ -1,7 +1,7 @@
 import Form from "./components/Form";
 import FilterButton from "./components/FilterButton";
 import Todo from "./components/Todo";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 
 const FILTER_MAP = {
@@ -11,18 +11,32 @@ const FILTER_MAP = {
 };
 const FILTER_NAMES = Object.keys(FILTER_MAP);
 
-const initialTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
 function App() {
-  const [tasks, setTasks] = useState(initialTasks);
+  const [tasks, setTasks] = useState(() => {
+    try {
+      const savedTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+      return Array.isArray(savedTasks) ? savedTasks : [];
+    } catch {
+      return [];
+    }
+  });
   const [filter, setFilter] = useState("All");
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   function addTask(name) {
     if (name.trim().toUpperCase() === "REACT") {
       alert("You cannot add a task with the name 'REACT'.");
       return;
     }
-    const newTask = { id: `todo-${nanoid()}`, name, completed: false };
+    const newTask = {
+      id: `todo-${nanoid()}`,
+      name,
+      completed: false,
+      priority: 0,
+    };
     setTasks([...tasks, newTask]);
   }
   function toggleTaskCompleted(id) {
@@ -53,6 +67,13 @@ function App() {
     });
     setTasks(editedTaskList);
   }
+  function updateTaskPriority(id, priority) {
+    setTasks((currentTasks) =>
+      currentTasks.map((task) =>
+        task.id === id ? { ...task, priority } : task,
+      ),
+    );
+  }
   const filterList = FILTER_NAMES.map((name) => (
     <FilterButton
       key={name}
@@ -64,15 +85,22 @@ function App() {
 
   const taskList = tasks
     .filter(FILTER_MAP[filter])
+    .slice()
+    .sort(
+      (firstTask, secondTask) =>
+        (firstTask.priority ?? 0) - (secondTask.priority ?? 0),
+    )
     .map((task) => (
       <Todo
         id={task.id}
         name={task.name}
         completed={task.completed}
+        priority={task.priority ?? 0}
         key={task.id}
         toggleTaskCompleted={toggleTaskCompleted}
         deleteTask={deleteTask}
         editTask={editTask}
+        updateTaskPriority={updateTaskPriority}
       />
     ));
 
