@@ -1,0 +1,167 @@
+.app-shell {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.topbar,
+.page-heading,
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+}
+
+.wordmark {
+  color: inherit;
+  text-decoration: none;
+}
+
+.wordmark-icon {
+  margin-right: 6px;
+}
+
+.live-dot,
+.heading-stamp,
+.demo-number,
+.status-dot,
+.list-mark {
+  display: none;
+}
+
+.topbar-note,
+.eyebrow,
+.article-label,
+.footer > span:first-child {
+  font-size: 12px;
+}
+
+.page-heading {
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 24px 0;
+}
+
+.page-heading h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.intro {
+  margin: 8px 0 0;
+}
+
+.demo-grid {
+  display: block;
+}
+
+.demo-card {
+  padding: 16px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.demo-card-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.concepts {
+  margin: 4px 0 0;
+  color: #666;
+  font-size: 13px;
+}
+
+.demo-content {
+  padding-top: 12px;
+}
+
+.greeting-list,
+.counter-demo,
+.profile-row,
+.stepper,
+.color-demo,
+.like-demo {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.greeting,
+.count-value,
+.step-value,
+.message,
+.profile-copy,
+.status,
+.field-label,
+.mirror-output,
+.food-list,
+.empty-state {
+  margin: 0;
+}
+
+.counter-demo {
+  justify-content: flex-start;
+}
+
+.count-value,
+.step-value {
+  font-size: 24px;
+}
+
+.profile-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.avatar {
+  font-weight: bold;
+}
+
+.stack {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.text-input {
+  width: min(100%, 320px);
+}
+
+.food-list {
+  padding-left: 20px;
+}
+
+.color-swatch {
+  width: 64px;
+  height: 48px;
+  background: red;
+}
+
+.swatch-blue {
+  background: blue;
+}
+
+.like-demo h3 {
+  margin: 4px 0;
+  font-size: 16px;
+}
+
+.footer {
+  margin-top: 16px;
+  border-top: 1px solid #ddd;
+  color: #666;
+  font-size: 13px;
+}
+
+@media (max-width: 480px) {
+  .topbar,
+  .footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+}

@@ -206,8 +206,14 @@ body {
 .todoapp > h1 {
   display: block;
   margin: 0;
-  margin-bottom: 1rem;
   max-width: 100%;
+  text-align: center;
+}
+
+.todoapp > .server-label {
+  color: #666;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
   text-align: center;
 }
 
