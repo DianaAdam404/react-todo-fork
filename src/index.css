@@ -211,10 +211,22 @@ body {
 }
 
 .todoapp > .server-label {
-  color: #666;
+  background-color: #e5e5e5;
+  color: #333;
+  display: table;
   margin-top: 0.5rem;
   margin-bottom: 1rem;
+  padding: 0.4rem 0.6rem;
   text-align: center;
+}
+
+.todoapp > .server-online {
+  background-color: #20ef00;
+}
+
+.todoapp > .server-offline {
+  background-color: #ca3c3c;
+  color: white;
 }
 
 .label__lg {

@@ -3,6 +3,7 @@ import FilterButton from "./components/FilterButton";
 import Todo from "./components/Todo";
 import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
+import axios from "axios";
 
 const FILTER_MAP = {
   All: () => true,
@@ -21,10 +22,28 @@ function App() {
     }
   });
   const [filter, setFilter] = useState("All");
+  const [serverStatus, setServerStatus] = useState("checking");
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    axios
+      .get("http://localhost:5173/")
+      .then(() => {
+        if (isMounted) setServerStatus("online");
+      })
+      .catch(() => {
+        if (isMounted) setServerStatus("offline");
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   function addTask(name) {
     if (name.trim().toUpperCase() === "REACT") {
@@ -110,7 +129,12 @@ function App() {
   return (
     <div className="todoapp stack-large">
       <h1>TodoMatic</h1>
-      <p className="server-label">Online szerver</p>
+      <p
+        className={`server-label server-${serverStatus}`}
+        aria-live="polite"
+      >
+        {serverStatus}
+      </p>
       <Form addTask={addTask} />
       <div className="filters btn-group stack-exception">
         <div className="filters btn-group stack-exception">{filterList}</div>
